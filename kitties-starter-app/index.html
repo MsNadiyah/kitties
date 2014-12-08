@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
-<html ng-app>
+<html ng-app="kittiesApp">
 	<head>
 		<meta charset="utf-8">
 
-		<title>An HTML Page</title>
+		<title>Saving the Kitties</title>
 
 		<!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
@@ -12,11 +12,45 @@
 
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/reset.css">
+
+		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
 		
 		<script src="js/angular.js"></script>
-		<script src="js/app.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/KittiesController.js"></script>
 	</head>
 
-	<body>
+	<body ng-controller="KittiesController as kitties">
+		<div id="main-container">
+			
+			<div class="left-container">
+				<h1>Kitties Needing Homes</h1>
+				<ul> 
+					<li class="cat-container" ng-repeat="kitty in kitties.unadoptedKitties()">
+						<p id="kitty-name">My name is {{ kitty.catName }}</p>
+						<p id="kitty-age">I am {{ kitty.monthsOld }}</p>
+						<p id="kitty-gender">I am a {{ kitty.gender }}</p>
+						<img id="kitty-image" ng-src="{{ kitty.image }}">
+						<p> Adopted? <input id="adoptedStatus" type="checkbox" ng-model="kitty.adopted"></p>
+					</li>
+				</ul>
+			</div>
+
+			<div class="right-container">
+				<h1>Adopted Kitties</h1>
+				<ul> 
+					<li class="cat-container" ng-repeat="kitty in kitties.adoptedKitties()">
+						<p id="kitty-name">My name is {{ kitty.catName }}</p>
+						<p id="kitty-age">I am {{ kitty.monthsOld }}</p>
+						<p id="kitty-gender">I am a {{ kitty.gender }}</p>
+						<img id="kitty-image" ng-src="{{ kitty.image }}">
+						<p> Adopted? <input id="adoptedStatus" type="checkbox" ng-model="kitty.adopted"></p>
+					</li>
+				</ul>
+			</div>
+
+		</div> 
 	</body>
 </html>
